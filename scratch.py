@@ -86,10 +86,11 @@ def sendEmail(to, content):
     server = smtplib.SMTP('smtp.gmail.com', 587)
 
     server.starttls()
+    sender_mail=input('enter your mail')
+    sender_password=input('enter your password')
 
-
-    server.login('tilakbhat201@gmail.com', 'diamond@123')
-    server.sendmail('tilakbhat201@gmail.com', to, content)
+    server.login(sender_mail, sender_password)
+    server.sendmail(sender_mail, to, content)
     server.close()
 
 
@@ -206,7 +207,7 @@ if __name__ == '__main__':
 
         elif "calculate" in query:
 
-            app_id = "7H3HWW-96RU66HAVL"
+            app_id = 0                             #Wolframalpha api key
             client = wolframalpha.Client(app_id)
             indx = query.lower().split().index('calculate')
             query = query.split()[indx + 1:]
@@ -241,10 +242,10 @@ if __name__ == '__main__':
 
 
         elif 'news' in query:
-
+            key = 0                                   #news organiztion api key
             try:
                 jsonObj = urlopen(
-                    '''http://newsapi.org/v2/top-headlines?sources=the-times-of-india&apiKey=acfcdf118bdf4208abddba1982da6582''')
+                    '''http://newsapi.org/v2/top-headlines?sources=the-times-of-india&apiKey={apikey}''')
                 data = json.load(jsonObj)
                 i = 1
 
@@ -335,7 +336,7 @@ if __name__ == '__main__':
             speak(" City name ")
             print("City name : ")
             city_name = takeCommand()
-            complete_url = base_url  + "q=" + city_name + "&appid=81a878e98ce752a3fee561bd5c21c696"
+            complete_url = base_url  + "q=" + city_name + "&appid={apikey}"
 
 
 
@@ -381,7 +382,7 @@ if __name__ == '__main__':
         elif "what is" in query or "who is" in query:
 
 
-            client = wolframalpha.Client('7H3HWW-96RU66HAVL')
+            client = wolframalpha.Client('apikey')
             res = client.query(query)
 
             try:
